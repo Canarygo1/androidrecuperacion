@@ -38,6 +38,19 @@ class PresenterActivity(
     }
   }
 
+  fun isUSerLogged() {
+    CoroutineScope(Dispatchers.IO).launch {
+      val loggedUser = localRepository.getLoggedUser()
+      withContext(Dispatchers.Main) {
+        if (loggedUser != null) {
+          view.goToHome()
+        } else {
+
+        }
+      }
+    }
+  }
+
   fun init() {
     CoroutineScope(Dispatchers.IO).launch {
       try {

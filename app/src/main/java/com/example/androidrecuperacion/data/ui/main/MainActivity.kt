@@ -20,6 +20,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity(), MainView {
   override fun goToHome() {
     val intent = Intent(this, HomeActivity::class.java)
+    finish()
     startActivity(intent)
   }
 
@@ -117,6 +118,7 @@ class MainActivity : AppCompatActivity(), MainView {
     val remoteRepository: RemoteRepository =
       RetrofitRemoteRepository(RetrofitFactory.getAvatarApi())
     presenter = PresenterActivity(this, remoteRepository, localRepository)
+    presenter.isUSerLogged()
     presenter.init()
   }
 }
