@@ -1,22 +1,30 @@
 package com.example.androidrecuperacion.data.ui.main
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.Spinner
+import android.widget.*
 import com.example.androidrecuperacion.R
+import com.example.androidrecuperacion.data.local.PreferencesLocalRepository
 import com.example.androidrecuperacion.data.model.Propertis
 import com.example.androidrecuperacion.data.remote.RemoteRepository
 import com.example.androidrecuperacion.data.remote.RetrofitRemoteRepository
+import com.example.androidrecuperacion.data.ui.home.HomeActivity
 import com.example.passscreentest.data.remote.RetrofitFactory
 import com.google.android.material.textfield.TextInputEditText
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MainView {
+  override fun goToHome() {
+    val intent = Intent(this, HomeActivity::class.java)
+    startActivity(intent)
+  }
+
   override fun showImage(url: String) {
+    this.url = url
     if (!url.equals("error")) {
       Picasso.get()
         .load(url)
@@ -26,9 +34,10 @@ class MainActivity : AppCompatActivity(), MainView {
     } else {
       avatarImage.setImageResource(0)
     }
-
   }
 
+  private lateinit var url: String
+  private lateinit var register: Button
   private lateinit var avatarImage: ImageView
   private lateinit var usernameTxt: TextInputEditText
   private lateinit var eyeSpinner: Spinner
@@ -57,15 +66,24 @@ class MainActivity : AppCompatActivity(), MainView {
     mouthSelected = ""
     noseSelected = ""
     eyeSelected = ""
-    usernameTxt = findViewById(R.id.textInputEditText4)
+    url = ""
+    usernameTxt = findViewById(R.id.textInputEditText5)
     eyeSpinner = findViewById(R.id.spinner)
     noseSpinner = findViewById(R.id.spinner2)
     mouthSpinner = findViewById(R.id.spinner3)
     avatarImage = findViewById(R.id.imageView)
-//    val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, emptyList)
-//    eyeSpinner.adapter = adapter
-//    val adapter2 = ArrayAdapter(this, android.R.layout.simple_list_item_1, emptyList)
-//    noseSpinner.adapter = adapter2
+    register = findViewById(R.id.button)
+    val localRepository =
+      PreferencesLocalRepository(
+        getSharedPreferences(
+          "login_preference",
+          Context.MODE_PRIVATE
+        )
+      )
+
+    register.setOnClickListener {
+      presenter.saveClicked(usernameTxt.text.toString(), url)
+    }
     eyeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
       override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
         eyeSelected = parent.getItemAtPosition(position).toString()
@@ -98,7 +116,7 @@ class MainActivity : AppCompatActivity(), MainView {
     }
     val remoteRepository: RemoteRepository =
       RetrofitRemoteRepository(RetrofitFactory.getAvatarApi())
-    presenter = PresenterActivity(this, remoteRepository)
+    presenter = PresenterActivity(this, remoteRepository, localRepository)
     presenter.init()
   }
 }

@@ -1,6 +1,8 @@
 package com.example.androidrecuperacion.data.ui.main
 
+import com.example.androidrecuperacion.data.local.LocalRepository
 import com.example.androidrecuperacion.data.model.Propertis
+import com.example.androidrecuperacion.data.model.User
 import com.example.androidrecuperacion.data.remote.RemoteRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -9,7 +11,8 @@ import kotlinx.coroutines.withContext
 
 class PresenterActivity(
   private var view: MainView,
-  private var remoteRepository: RemoteRepository
+  private var remoteRepository: RemoteRepository,
+  private var localRepository: LocalRepository
 ) {
   //  fun buttonClicked(texto: String) {
 //    CoroutineScope(Dispatchers.IO).launch {
@@ -24,6 +27,14 @@ class PresenterActivity(
       view.showImage("error")
     } else {
       view.showImage("https://api.adorable.io/avatars/face/${eyes}/${nose}/${mouth}/EDEDFF/200")
+    }
+  }
+
+  fun saveClicked(username: String, url: String) {
+    CoroutineScope(Dispatchers.IO).launch {
+      var user = User(username, url)
+      val loggedUser = localRepository.setLoggedUser(user)
+      view.goToHome()
     }
   }
 
@@ -48,4 +59,5 @@ class PresenterActivity(
 interface MainView {
   fun showLists(propertis: Propertis)
   fun showImage(url: String)
+  fun goToHome()
 }
