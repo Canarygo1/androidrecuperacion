@@ -17,7 +17,7 @@ class HomeActivity : AppCompatActivity(), HomeView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        avatarImage = findViewById(R.id.imageView2)
+        avatarImage = findViewById(R.id.avatarImage)
         username = findViewById(R.id.name)
         val localRepository =
             PreferencesLocalRepository(

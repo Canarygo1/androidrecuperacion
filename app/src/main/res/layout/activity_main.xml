@@ -8,36 +8,36 @@
 
 
   <Spinner
-    android:id="@+id/spinner"
+    android:id="@+id/eyes"
     android:layout_width="346dp"
     android:layout_height="30dp"
     android:layout_marginBottom="36dp"
-    app:layout_constraintBottom_toTopOf="@+id/spinner2"
-    app:layout_constraintEnd_toEndOf="@+id/textInputEditText5"
+    app:layout_constraintBottom_toTopOf="@+id/nose"
+    app:layout_constraintEnd_toEndOf="@+id/name"
     app:layout_constraintHorizontal_bias="0.6"
-    app:layout_constraintStart_toStartOf="@+id/textInputEditText5" />
+    app:layout_constraintStart_toStartOf="@+id/name" />
 
   <Spinner
-    android:id="@+id/spinner2"
+    android:id="@+id/nose"
     android:layout_width="346dp"
     android:layout_height="36dp"
     android:layout_marginBottom="20dp"
-    app:layout_constraintBottom_toTopOf="@+id/spinner3"
+    app:layout_constraintBottom_toTopOf="@+id/mouth"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="0.022"
-    app:layout_constraintStart_toStartOf="@+id/spinner" />
+    app:layout_constraintStart_toStartOf="@+id/eyes" />
 
   <Spinner
-    android:id="@+id/spinner3"
+    android:id="@+id/mouth"
     android:layout_width="345dp"
     android:layout_height="41dp"
     android:layout_marginBottom="32dp"
-    app:layout_constraintBottom_toTopOf="@+id/imageView"
+    app:layout_constraintBottom_toTopOf="@+id/avatarImage"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent" />
 
   <ImageView
-    android:id="@+id/imageView"
+    android:id="@+id/avatarImage"
     android:layout_width="178dp"
     android:layout_height="174dp"
     android:layout_marginBottom="16dp"
@@ -48,11 +48,11 @@
     tools:src="@tools:sample/avatars" />
 
   <com.google.android.material.textfield.TextInputEditText
-    android:id="@+id/textInputEditText4"
+    android:id="@+id/username"
     android:layout_width="343dp"
     android:layout_height="46dp"
     android:hint="Username"
-    app:layout_constraintBottom_toTopOf="@+id/textInputEditText5"
+    app:layout_constraintBottom_toTopOf="@+id/name"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="0.514"
     app:layout_constraintStart_toStartOf="parent"
@@ -60,14 +60,14 @@
     app:layout_constraintVertical_bias="0.891" />
 
   <com.google.android.material.textfield.TextInputEditText
-    android:id="@+id/textInputEditText5"
+    android:id="@+id/name"
     android:layout_width="341dp"
     android:layout_height="53dp"
     android:layout_marginBottom="20dp"
     android:hint="name"
-    app:layout_constraintBottom_toTopOf="@+id/spinner"
+    app:layout_constraintBottom_toTopOf="@+id/eyes"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="0.057"
-    app:layout_constraintStart_toStartOf="@+id/textInputEditText4" />
+    app:layout_constraintStart_toStartOf="@+id/username" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

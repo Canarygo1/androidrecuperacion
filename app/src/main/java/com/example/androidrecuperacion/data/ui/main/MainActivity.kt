@@ -18,7 +18,6 @@ import com.example.androidrecuperacion.data.ui.home.HomeActivity
 import com.example.passscreentest.data.remote.RetrofitFactory
 import com.google.android.material.textfield.TextInputEditText
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MainView {
   override fun goToHome() {
@@ -84,11 +83,11 @@ class MainActivity : AppCompatActivity(), MainView {
     noseSelected = ""
     eyeSelected = ""
     url = ""
-    usernameTxt = findViewById(R.id.textInputEditText5)
-    eyeSpinner = findViewById(R.id.spinner)
-    noseSpinner = findViewById(R.id.spinner2)
-    mouthSpinner = findViewById(R.id.spinner3)
-    avatarImage = findViewById(R.id.imageView)
+    usernameTxt = findViewById(R.id.name)
+    eyeSpinner = findViewById(R.id.eyes)
+    noseSpinner = findViewById(R.id.nose)
+    mouthSpinner = findViewById(R.id.mouth)
+    avatarImage = findViewById(R.id.avatarImage)
     val localRepository =
       PreferencesLocalRepository(
         getSharedPreferences(
@@ -96,7 +95,7 @@ class MainActivity : AppCompatActivity(), MainView {
           Context.MODE_PRIVATE
         )
       )
-    
+
     eyeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
       override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
         eyeSelected = parent.getItemAtPosition(position).toString()
