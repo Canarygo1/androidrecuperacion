@@ -4,6 +4,9 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import com.example.androidrecuperacion.R
@@ -38,7 +41,6 @@ class MainActivity : AppCompatActivity(), MainView {
   }
 
   private lateinit var url: String
-  private lateinit var register: Button
   private lateinit var avatarImage: ImageView
   private lateinit var usernameTxt: TextInputEditText
   private lateinit var eyeSpinner: Spinner
@@ -61,6 +63,20 @@ class MainActivity : AppCompatActivity(), MainView {
     mouthSpinner.adapter = adapter3
   }
 
+  override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    val inflater: MenuInflater = menuInflater
+    inflater.inflate(R.menu.appbar_menu, menu)
+    return super.onCreateOptionsMenu(menu)
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    when (item.itemId) {
+      R.id.sendMenuOption -> presenter.saveClicked(usernameTxt.text.toString(), url)
+
+    }
+    return true
+  }
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
@@ -73,7 +89,6 @@ class MainActivity : AppCompatActivity(), MainView {
     noseSpinner = findViewById(R.id.spinner2)
     mouthSpinner = findViewById(R.id.spinner3)
     avatarImage = findViewById(R.id.imageView)
-    register = findViewById(R.id.button)
     val localRepository =
       PreferencesLocalRepository(
         getSharedPreferences(
@@ -81,10 +96,7 @@ class MainActivity : AppCompatActivity(), MainView {
           Context.MODE_PRIVATE
         )
       )
-
-    register.setOnClickListener {
-      presenter.saveClicked(usernameTxt.text.toString(), url)
-    }
+    
     eyeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
       override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
         eyeSelected = parent.getItemAtPosition(position).toString()

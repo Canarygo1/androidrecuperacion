@@ -18,7 +18,7 @@ class HomeActivity : AppCompatActivity(), HomeView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         avatarImage = findViewById(R.id.imageView2)
-        username = findViewById(R.id.textView)
+        username = findViewById(R.id.name)
         val localRepository =
             PreferencesLocalRepository(
                 getSharedPreferences(
