@@ -19,7 +19,12 @@ class PresenterActivity(
 //    }
 //  }
   fun atributeChange(eyes: String, mouth: String, nose: String) {
-    view.showImage("https://api.adorable.io/avatars/face/${eyes}/${nose}/${mouth}/EDEDFF/200")
+    if (eyes.equals("Select the eyes") || mouth.equals("Select the mouth") || nose.equals("Select the nose")) {
+
+      view.showImage("error")
+    } else {
+      view.showImage("https://api.adorable.io/avatars/face/${eyes}/${nose}/${mouth}/EDEDFF/200")
+    }
   }
 
   fun init() {

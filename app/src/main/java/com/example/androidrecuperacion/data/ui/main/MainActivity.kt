@@ -17,26 +17,31 @@ import com.squareup.picasso.Picasso
 
 class MainActivity : AppCompatActivity(), MainView {
   override fun showImage(url: String) {
+    if (!url.equals("error")) {
+      Picasso.get()
+        .load(url)
+        .resize(50, 50)
+        .centerCrop()
+        .into(avatarImage)
+    } else {
+      avatarImage.setImageResource(0)
+    }
 
-    Picasso.get()
-      .load(url)
-      .resize(50, 50)
-      .centerCrop()
-      .into(avatarImage)
   }
-  private lateinit var avatarImage:ImageView
+
+  private lateinit var avatarImage: ImageView
   private lateinit var usernameTxt: TextInputEditText
   private lateinit var eyeSpinner: Spinner
   private lateinit var noseSpinner: Spinner
   private lateinit var mouthSpinner: Spinner
   private lateinit var presenter: PresenterActivity
-  lateinit var mouthSelected:String
-  lateinit var noseSelected:String
-  lateinit var eyeSelected:String
+  lateinit var mouthSelected: String
+  lateinit var noseSelected: String
+  lateinit var eyeSelected: String
   override fun showLists(propertis: Propertis) {
-    propertis.face.eyes.add(0,"Select the eyes" )
-    propertis.face.nose.add(0,"Select the nose" )
-    propertis.face.mouth.add(0,"Select the mouth" )
+    propertis.face.eyes.add(0, "Select the eyes")
+    propertis.face.nose.add(0, "Select the nose")
+    propertis.face.mouth.add(0, "Select the mouth")
 
     val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, propertis.face.eyes)
     eyeSpinner.adapter = adapter
@@ -49,7 +54,7 @@ class MainActivity : AppCompatActivity(), MainView {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
-    mouthSelected =""
+    mouthSelected = ""
     noseSelected = ""
     eyeSelected = ""
     usernameTxt = findViewById(R.id.textInputEditText4)
@@ -64,7 +69,7 @@ class MainActivity : AppCompatActivity(), MainView {
     eyeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
       override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
         eyeSelected = parent.getItemAtPosition(position).toString()
-        presenter.atributeChange(eyeSelected,mouthSelected,noseSelected)
+        presenter.atributeChange(eyeSelected, mouthSelected, noseSelected)
       }
 
       override fun onNothingSelected(parent: AdapterView<*>) {
@@ -74,7 +79,7 @@ class MainActivity : AppCompatActivity(), MainView {
     noseSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
       override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
         noseSelected = parent.getItemAtPosition(position).toString()
-        presenter.atributeChange(eyeSelected,mouthSelected,noseSelected)
+        presenter.atributeChange(eyeSelected, mouthSelected, noseSelected)
       }
 
       override fun onNothingSelected(parent: AdapterView<*>) {
@@ -84,7 +89,7 @@ class MainActivity : AppCompatActivity(), MainView {
     mouthSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
       override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
         mouthSelected = parent.getItemAtPosition(position).toString()
-        presenter.atributeChange(eyeSelected,mouthSelected,noseSelected)
+        presenter.atributeChange(eyeSelected, mouthSelected, noseSelected)
       }
 
       override fun onNothingSelected(parent: AdapterView<*>) {
