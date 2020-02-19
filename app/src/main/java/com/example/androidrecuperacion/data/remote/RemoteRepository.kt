@@ -4,5 +4,4 @@ import com.example.androidrecuperacion.data.model.Propertis
 
 interface RemoteRepository {
   suspend fun getOptions(): Propertis
-
 }
