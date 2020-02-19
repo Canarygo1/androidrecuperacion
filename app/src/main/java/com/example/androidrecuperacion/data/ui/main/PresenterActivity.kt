@@ -18,9 +18,10 @@ class PresenterActivity(
 //      view.gotoHome()
 //    }
 //  }
-  fun atributeChange() {
-
+  fun atributeChange(eyes: String, mouth: String, nose: String) {
+    view.showImage("https://api.adorable.io/avatars/face/${eyes}/${nose}/${mouth}/EDEDFF/200")
   }
+
   fun init() {
     CoroutineScope(Dispatchers.IO).launch {
       try {
@@ -41,5 +42,5 @@ class PresenterActivity(
 
 interface MainView {
   fun showLists(propertis: Propertis)
-  fun showImage(Url: String)
+  fun showImage(url: String)
 }
